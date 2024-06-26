@@ -40,7 +40,7 @@ namespace Scheduler
 
         internal new void Edit(AbstractNote old_note,AbstractNote update_note)
         {
-            base.Change(old_note,update_note);
+            base.Edit(old_note,update_note);
         }
 
         internal new void Delete(AbstractNote note)

@@ -1,5 +1,6 @@
 ﻿
 using Scheduler;
+using System.Text.RegularExpressions;
 
 namespace Scheduler
 {
@@ -17,25 +18,20 @@ namespace Scheduler
         // Reads data from a document and groups object data into separates rows
         public void Operate(ref List<string> result)
         {
-            string line = "";
             try
             {
+                string file = "";
+
                 using (StreamReader reader = new StreamReader(this.document.path))
                 {
-                    while (reader.Read() > 0)
-                    {
-                        string obj = "";
+                    file = reader.ReadToEnd();
+                }
 
-                        while ((line = reader.ReadLine()) != $"<\\{key}>")
-                        {
-                            if (!(line.Contains(key)))
-                            {
-                                obj += line + '\r';
-                            }
-                        }
+                List<Match> matches = Regex.Matches(file, @$"<{key}>([\s\S]+?)<\\{key}>").ToList();
 
-                        result.Add(obj);
-                    }
+                foreach (Match m in matches)
+                {
+                    result.Add(m.Groups[1].Value);
                 }
             }
             catch
