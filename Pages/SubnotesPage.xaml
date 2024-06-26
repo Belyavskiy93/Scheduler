@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Scheduler"
+             x:Class="Scheduler.SubnotesPage"
+             NavigationPage.HasNavigationBar="True">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="8*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <ScrollView Grid.Row="0">
+            <ListView x:Name="list" ItemsSource="{Binding current_list}"
+                      SelectedItem="{Binding Selected_note}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Edit" Clicked="Edit_Subnote"/>
+                                <MenuItem Text="Delete" Clicked="Delete_Subnote"
+                                          CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                            <VerticalStackLayout Margin="10">
+                                <Label Text="{Binding Name}"  FontSize="16" FontAttributes="Bold" 
+                                       TextColor="DarkViolet"/>
+                                <Label Text="{Binding Description}" Padding="10"/>
+                            </VerticalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </ScrollView>
+        <HorizontalStackLayout x:Name="operations"  Grid.Row="1"
+            HorizontalOptions="EndAndExpand"
+            VerticalOptions="CenterAndExpand"
+            Margin="10">
+                <Button Text="+" TextColor="White" BackgroundColor="Black" FontSize="20" FontAttributes="Bold" Clicked="Add_Subnote" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>

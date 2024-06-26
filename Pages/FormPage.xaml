@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Scheduler.FormPage"
+             NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="1" VerticalOptions="Center" BackgroundColor="{StaticResource Primary}">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20,20,20,20"/>
+            </Border.StrokeShape>
+            <VerticalStackLayout>
+                <Label Text="Subnote:" HorizontalOptions="Center" FontSize="18" Grid.Row="0" TextColor="White"/>
+                <Label Text="Name" TextColor ="White" Padding="5" />
+                <Entry x:Name="name" Text="{Binding Name}" MaxLength="30" BackgroundColor="White" Margin="5" Grid.Row="2"
+                       IsSpellCheckEnabled="False" ClearButtonVisibility="WhileEditing" 
+                       TextChanged="ValidationEntryText"/>
+                <Label Text="Description"  TextColor ="White" Padding="5"/>
+                <Editor x:Name="description" Text="{Binding Description}" BackgroundColor="White" Margin="5"
+                        AutoSize="TextChanges" HeightRequest="100" MaxLength="300" Grid.Row="4" IsSpellCheckEnabled="False"
+                        TextChanged="ValidationEditorText"/>
+                <Button x:Name="save" Text="Save"  Margin="10" HorizontalOptions="Center" VerticalOptions="Center"
+                        BackgroundColor="Black" TextColor="White"/>
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+    
+</ContentPage>
