@@ -9,14 +9,14 @@ namespace Scheduler
         public string Convert(AbstractNote note)
         {
             PropertyInfo[] properties = note.GetType().GetProperties();
-            string result = $"\n<{note.GetType().Name}>";
+            string result = $"<{note.GetType().Name}>\r";
             
             foreach (PropertyInfo p in properties)
             {
-                result += $"\n{p.Name}>{p.GetValue(note)}<";
+                result += $"{p.Name}>{p.GetValue(note)}<\r";
             }
 
-            result += $"\n<\\{note.GetType().Name}>";
+            result += $"<\\{note.GetType().Name}>\r";
             return result;
         }
     }

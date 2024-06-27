@@ -10,7 +10,7 @@ namespace Scheduler
         protected AbstractNote selected_note;
 
         public event PropertyChangedEventHandler? PropertyChanged;
-        protected IDataOperation writer { get; set; }
+        protected IDataOperation writer { get; set; } 
         protected IDataOperation reader { get; set; }
         protected IDataOperation editor { get; set; }
         public ObservableCollection<AbstractNote> Notes { get; set; } = new ObservableCollection<AbstractNote>();
@@ -51,13 +51,14 @@ namespace Scheduler
         }
         internal void Edit(AbstractNote old_note,AbstractNote update_note)
         {
+            update_note.Time = DateOnly.FromDateTime(DateTime.Now).ToString();
             string old = old_note.Convert();
             string update = update_note.Convert();
             editor.Operate(old, update);
         }
-        abstract protected void GetDataFromDocument();
-
+        
         // Converts all data to writes into a document
+        abstract protected void GetDataFromDocument();
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));

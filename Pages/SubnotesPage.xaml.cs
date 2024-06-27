@@ -6,11 +6,11 @@ public partial class SubnotesPage : ContentPage
     DisplaySubnotes display;
     AbstractNote route_note;
     AbstractNote old;
-    public SubnotesPage(AbstractNote note)
+    internal SubnotesPage(DisplayNotes notes)
 	{
         InitializeComponent();
         
-        this.route_note = note;
+        this.route_note = notes.Selected_note;
         Title= this.route_note.Name;
         
         string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -22,8 +22,8 @@ public partial class SubnotesPage : ContentPage
         }
 
         AbstractDocument document = new TextDocument(container);
-        display = new DisplaySubnotes(new TextDocumentWriter(document),new TextDocumentReader(document,"Subnote"), 
-                                      new TextDocumentEditor(document),this.route_note);
+        display = new DisplaySubnotes(new TextDocumentWriter(document), new TextDocumentReader(document, "Subnote"),
+                                      new TextDocumentEditor(document), notes);
 
         BindingContext = display;
     }

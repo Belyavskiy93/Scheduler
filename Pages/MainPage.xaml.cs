@@ -46,7 +46,7 @@ public partial class MainPage : ContentPage
 
     private async void Open_Sublist(object sender, ItemTappedEventArgs e)
     {
-        sub_page = new SubnotesPage(display.Selected_note);
+        sub_page = new SubnotesPage(display);
         await Navigation.PushAsync(sub_page);
         list.SelectedItem = null;
     }
@@ -56,7 +56,7 @@ public partial class MainPage : ContentPage
         MenuItem? menu = sender as MenuItem;
         display.Selected_note = menu.BindingContext as AbstractNote;
 
-        sub_page = new SubnotesPage(display.Selected_note);
+        sub_page = new SubnotesPage(display);
         sub_page.Delete();
 
         display.Delete(display.Selected_note);

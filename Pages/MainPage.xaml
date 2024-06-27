@@ -22,6 +22,7 @@
                             </ViewCell.ContextActions>
                             <StackLayout Margin="10">
                                 <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold" TextColor="DarkViolet"/>
+                                <Label Text= "{Binding Time}" FontSize="12" TextColor="Grey" HorizontalOptions="End"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

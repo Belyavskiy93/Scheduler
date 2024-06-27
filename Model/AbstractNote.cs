@@ -10,7 +10,6 @@ namespace Scheduler
         internal IConvertType? converter { get; set; }
         protected string? id { get; set; }
         protected string? name { get; set; }
-        protected string? description { get; set; }
         protected  string time { get; set; }
 
         public string Id
@@ -32,51 +31,37 @@ namespace Scheduler
             }
         }
 
-        public string Description
+
+        public string Time
         {
-            get => this.description;
+            get => this.time;
             set
             {
-                if (this.description != value)
+                if(this.time != value)
                 {
-                    this.description = value;
+                    this.time = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        public string Time
-        {
-            get => this.time;
-            set => this.time = value;
-        }
-
 
         internal AbstractNote() { }
-        internal AbstractNote(string name,string description = "")
+        internal AbstractNote(string name)
         {
             this.id = Guid.NewGuid().ToString();
             this.name = name;
-            this.description = description;
-            time = DateTime.Now.ToString();
-        }
-
-        internal AbstractNote(string id,string name,string description="",string time="")
-        {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.time = DateTime.Now.ToString();
+            time = DateOnly.FromDateTime(DateTime.Now).ToString();
         }
 
 
-        static internal void CopyAbstractNote(AbstractNote note_1,AbstractNote note_2)
+        static internal void CopyAbstractNote(AbstractNote source,AbstractNote receiver)
         {
-            PropertyInfo[] properties = note_1.GetType().GetProperties();
+            PropertyInfo[] properties = source.GetType().GetProperties();
 
             foreach (PropertyInfo p in properties)
             {
-                p.SetValue(note_2, p.GetValue(note_1));
+                p.SetValue(receiver, p.GetValue(source));
             }
         }
 
