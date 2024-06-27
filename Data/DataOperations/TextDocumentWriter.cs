@@ -12,13 +12,11 @@ namespace Scheduler
         }
 
         // Writes data in a document
-        // If option = false - rewrites document with updated data
-        // If option = true - adds new data to the document
-        public void  Operate(string data,bool option)
+        public void  Operate(string data)
         {
             try
             {
-                using (StreamWriter writer = new StreamWriter(this.document.path, option))
+                using (StreamWriter writer = new StreamWriter(this.document.path, true))
                 {
                     writer.Write(data);
                 }

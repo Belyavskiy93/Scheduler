@@ -16,10 +16,11 @@ namespace Scheduler
 
         
         // Reads data from a document and groups object data into separates rows
-        public void Operate(ref List<string> result)
+        public void Operate(ref List<string> result,string id)
         {
             try
             {
+                List<Match> matches = new List<Match>();
                 string file = "";
 
                 using (StreamReader reader = new StreamReader(this.document.path))
@@ -27,7 +28,14 @@ namespace Scheduler
                     file = reader.ReadToEnd();
                 }
 
-                List<Match> matches = Regex.Matches(file, @$"<{key}>([\s\S]+?)<\\{key}>").ToList();
+                if(id!= string.Empty)
+                {
+                    matches = Regex.Matches(file, @$"<{key}>([\S\s]+?)<\\{key}>").Where(m => m.Value.Contains(id)).ToList();
+                }
+                else
+                {
+                    matches = Regex.Matches(file, @$"<{key}>([\S\s]+?)<\\{key}>").ToList();
+                }
 
                 foreach (Match m in matches)
                 {

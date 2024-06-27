@@ -3,15 +3,15 @@ namespace Scheduler;
 
 public partial class SubnotesPage : ContentPage
 {
-    static DisplaySubnotes display;
+    DisplaySubnotes display;
     AbstractNote route_note;
     AbstractNote old;
     public SubnotesPage(AbstractNote note)
 	{
         InitializeComponent();
         
-        route_note = note;
-        Title= route_note.Name;
+        this.route_note = note;
+        Title= this.route_note.Name;
         
         string path = AppDomain.CurrentDomain.BaseDirectory;
         string container = Path.Combine(path, "Subnotes.txt");
@@ -23,7 +23,7 @@ public partial class SubnotesPage : ContentPage
 
         AbstractDocument document = new TextDocument(container);
         display = new DisplaySubnotes(new TextDocumentWriter(document),new TextDocumentReader(document,"Subnote"), 
-                                      new TextDocumentEditor(document),route_note);
+                                      new TextDocumentEditor(document),this.route_note);
 
         BindingContext = display;
     }
@@ -57,9 +57,9 @@ public partial class SubnotesPage : ContentPage
     // Deletes sublist of the specifed Note. Used to delete Note and all associated data
     internal void Delete()
     {
-        for(int i = 0; i < display.current_list.Count; ++i)
+        for(int i = 0; i < display.Notes.Count; ++i)
         {
-            display.Delete(display.current_list[i]);
+            display.Delete(display.Notes[i]);
             --i;
         }
     }

@@ -8,7 +8,7 @@ namespace Scheduler
     {
         public event PropertyChangedEventHandler? PropertyChanged;
         internal IConvertType? converter { get; set; }
-        protected string id { get; set; }
+        protected string? id { get; set; }
         protected string? name { get; set; }
         protected string? description { get; set; }
         protected  string time { get; set; }

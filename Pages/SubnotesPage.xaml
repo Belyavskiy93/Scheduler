@@ -11,7 +11,7 @@
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
         <ScrollView Grid.Row="0">
-            <ListView x:Name="list" ItemsSource="{Binding current_list}"
+            <ListView x:Name="list" ItemsSource="{Binding Notes}"
                       SelectedItem="{Binding Selected_note}">
                 <ListView.ItemTemplate>
                     <DataTemplate>

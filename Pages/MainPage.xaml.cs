@@ -4,7 +4,7 @@ namespace Scheduler;
 
 public partial class MainPage : ContentPage
 {
-    static DisplayNotes display;
+    DisplayNotes display;
     SubnotesPage sub_page;
     
     public MainPage()

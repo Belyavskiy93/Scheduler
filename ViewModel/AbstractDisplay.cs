@@ -23,10 +23,6 @@ namespace Scheduler
             this.editor = editor;
         }
 
-        internal IDataOperation Writer
-        {
-            get => writer;
-        }
         public AbstractNote Selected_note
         {
             get => this.selected_note;
@@ -45,7 +41,7 @@ namespace Scheduler
         {
             this.Notes.Add(note);
             string data = note.Convert();
-            this.writer.Operate(data, true);
+            this.writer.Operate(data);
         }
         internal void Delete(AbstractNote note)
         {
@@ -59,7 +55,7 @@ namespace Scheduler
             string update = update_note.Convert();
             editor.Operate(old, update);
         }
-        abstract internal void GetDataFromDocument();
+        abstract protected void GetDataFromDocument();
 
         // Converts all data to writes into a document
         public void OnPropertyChanged([CallerMemberName] string prop = "")

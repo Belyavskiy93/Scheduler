@@ -16,7 +16,9 @@ namespace Scheduler
             this.document = document;
         }
 
-
+        // Seeks the target string and replaces it.
+        // If It needs to delete object,the replacement variable is equal empty string.
+        // If It needs to edit object,the replacement variable has a value.
         public void Operate(string target,string replace)
         {
             StringBuilder data = new StringBuilder();

@@ -14,7 +14,6 @@ namespace Scheduler
             return (Note)this.converter.Convert(data);
         }
 
-
         internal override string Convert()
         {
             this.converter = new ConvertToString();

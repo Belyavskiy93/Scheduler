@@ -27,10 +27,10 @@ namespace Scheduler
             base.Edit(old_note, update_note);
         }
 
-        internal override void GetDataFromDocument()
+        protected override void GetDataFromDocument()
         {
             List<string> data = new List<string>();
-            this.reader.Operate(ref data);
+            this.reader.Operate(ref data,string.Empty);
 
             foreach (string s in data)
             {

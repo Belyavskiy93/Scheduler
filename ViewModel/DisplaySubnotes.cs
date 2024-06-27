@@ -7,34 +7,17 @@ namespace Scheduler
 {
     internal class DisplaySubnotes : AbstractDisplay
     {
-        private ObservableCollection<AbstractNote> Current_list = new ObservableCollection<AbstractNote>();
-        private AbstractNote route_note;
+        private AbstractNote route_note { get; set; }
         public DisplaySubnotes() { }
         public DisplaySubnotes(IDataOperation writer,IDataOperation reader,IDataOperation editor, AbstractNote note) 
             : base(writer, reader,editor)
         {
-            GetDataFromDocument();
             route_note = note;
-        }
-
-        public ObservableCollection<AbstractNote> current_list
-        {
-            get
-            {
-                foreach(AbstractNote n in this.Notes)
-                {
-                    if(n.Id == route_note.Id && !this.Current_list.Contains(n))
-                    {
-                        this.Current_list.Add(n);
-                    }
-                }
-                return this.Current_list;
-            }
+            GetDataFromDocument();
         }
 
         internal new void Add(AbstractNote note)
         {
-            this.current_list.Add(note);
             base.Add(note);
         }
 
@@ -45,15 +28,14 @@ namespace Scheduler
 
         internal new void Delete(AbstractNote note)
         {
-            this.current_list.Remove(note);
             base.Delete(note);
         }
 
         // Received all subnotes from document,converts to Subnotes and adds to list
-        internal override void GetDataFromDocument()
+        protected override void GetDataFromDocument()
         {
             List<string> data = new List<string>();
-            this.reader.Operate(ref data);
+            this.reader.Operate(ref data,this.route_note.Id);
 
             foreach (string s in data)
             {

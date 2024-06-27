@@ -13,7 +13,7 @@ namespace Scheduler
             this.note = note;
         }
 
-        // converts data received from a document onto Note
+        // converts data received from a document into Note
         public AbstractNote Convert(string data)
         {
             PropertyInfo[] properties = this.note.GetType().GetProperties();
